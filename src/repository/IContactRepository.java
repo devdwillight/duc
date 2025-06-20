@@ -1,4 +1,4 @@
 package repository;
 
-public interface IContactRepository {
+public interface IContactRepository  {
 }

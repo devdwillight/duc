@@ -1,0 +1,10 @@
+TC_EMP_001,Valid Employee,NV-0003,Nguyen Van C,01/01/1995,Nam,123123123,0911223344,c.nguyen@furama.com,Dai hoc,Quan ly,20000000.00,PASS
+TC_EMP_002,Name is null,NV-0004,,05/05/1990,Nu,456456456,0922334455,d.le@furama.com,Cao dang,Le tan,8000000.00,Name is required
+TC_EMP_003,Name is empty,NV-0005,   ,10/10/1988,Nam,789789789,0933445566,e.tran@furama.com,Dai hoc,Quan ly,18000000.00,Name is required
+TC_EMP_004,Invalid Email Format,NV-0006,Pham Thi F,01/01/1990,Nu,1122334455,0944556677,f.phamfurama.com,Trung cap,Phuc vu,5000000.00,Invalid email
+TC_EMP_005,Email is null,NV-0007,Hoang Van G,03/03/1992,Nam,2233445566,0955667788,,Dai hoc,Chuyen vien,10000000.00,Invalid email
+TC_EMP_006,Invalid Phone Number Format,NV-0008,Bui Thi H,07/07/1993,Nu,3344556677,1234567890,h.bui@furama.com,Cao dang,Giam sat,0,Invalid phone number
+TC_EMP_007,Phone Number is null,NV-0009,Do Van I,12/12/1991,Nam,4455667788,,i.do@furama.com,Dai hoc,CEO,25000000.00,Invalid phone number
+TC_EMP_008,Experience is null,NV-0010,Ly Thi K,11/11/1994,Nu,5566778899,0988990011,k.ly@furama.com,,Le tan,6000000.00,Employee experience is required
+TC_EMP_009,Experience is empty,NV-0011,Dang Van L,02/02/1996,Nam,6677889900,0999001122,l.dang@furama.com,  ,Giam doc,30000000.00,Employee experience is required
+TC_EMP_010,All valid but not the final step,NV-0012,Nguyen A Duy,10/10/1993,Nam,123456789,0912345678,nad@example.com,Dai hoc,Quan ly,15000000.00,Create success

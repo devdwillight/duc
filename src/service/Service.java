@@ -1,4 +1,9 @@
 package service;
 
-public interface Service {
+public interface Service<T> {
+    T findById(String id);
+
+    void add(T entity);
+
+    void save();
 }

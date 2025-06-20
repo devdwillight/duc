@@ -1,0 +1,5 @@
+TC01,Tạo Customer với dữ liệu hợp lệ,1,Nguyen Van A,1990-01-01,Male,0901234567,a@gmail.com,Hanoi,Diamond,Create success
+TC02,Tạo Customer không có tên,2,,1995-05-05,Female,0909876543,b@gmail.com,HCMC,Platinum,Name is required
+TC03,Tạo Customer với email không hợp lệ,3,Le Thi B,1992-02-02,Female,0912345678,invalid_email,Hue,Gold,Invalid email
+TC04,Tạo Customer với số điện thoại không hợp lệ,4,Tran Van C,1988-12-12,Male,123abc,c@gmail.com,Da Nang,Silver,Invalid phone number
+TC05,Tạo Customer không có loại khách,5,Pham Thi D,1991-06-06,Female,0934567890,d@gmail.com,Can Tho,,Customer type is required

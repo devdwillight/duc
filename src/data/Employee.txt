@@ -1,0 +1,4 @@
+NV-0001,Nguyen Van A,2005-01-14,nU,123456789,0358867163,a.nguyen@furama.com,Dai hoc,Quan ly,1.5E7
+NV-0002,Tran Thi B,1992-05-20,Nu,987654321012,0987654321,b.tran@furama.com,Cao dang,Le tan,7500000.0
+NV-0003,Le Duc C,1985-11-01,Nam,456789123,0901234567,c.le@furama.com,Sau dai hoc,Giam doc,3.0E7
+NV-0004,Pham Van D,1998-03-08,Nam,112233445566,0911223344,d.pham@furama.com,Trung cap,Phuc vu,6000000.0

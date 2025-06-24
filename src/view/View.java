@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public interface View<T> {
@@ -8,4 +9,5 @@ public interface View<T> {
     void display(ArrayList<T> entities);
 
     T getDetail();
+
 }

@@ -2,6 +2,7 @@ package service;
 
 import enums.Experience_levels;
 import enums.Valid_Positions;
+import model.Customer;
 import model.Employee;
 import model.Person;
 import repository.EmployeeRepository;
@@ -56,21 +57,38 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee findById(String id) {
-        return null;
+        List<Employee> employees = employeeRepository.readFromFile();
+       Employee employee = null;
+        for (Employee emp : employees) {
+            if (emp.getEmployeeID().equals(id)) {
+                employee = emp ;
+                break;
+            }
+        }
+        return employee;
+
     }
 
     @Override
     public void update(Employee entity) {
-
+        try {
+            employeeRepository.updateEmployee(entity);
+        } catch (CustomException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void add(Employee entity) {
-
+    public void add(Employee entity){
+    employeeRepository.addEmployee(entity);
     }
 
     @Override
     public void save() {
 
+    }
+    public ArrayList<Employee> findAll() {
+        ArrayList<Employee> employees = employeeRepository.readFromFile();
+        return employees;
     }
 }

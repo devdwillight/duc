@@ -22,15 +22,11 @@ import java.util.stream.Collectors;
 
 public class CustomerService implements ICustomerService {
     private final CustomerRepository customerRepository = new CustomerRepository();
-    private final Scanner scanner = new Scanner(System.in);
+
     private static final DateTimeFormatter DISPLAY_DATE_FORMATTER = Validation.getDisplayDateFormatter(); // Lấy từ Validator
 
 
-    public void addNewCustomer(Customer entity) {
-    customerRepository.addCustomer(entity);
 
-
-    }
 
     public ArrayList<Customer> findAll() {
         ArrayList<Customer> customers = customerRepository.readFromFile();

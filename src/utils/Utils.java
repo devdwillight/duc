@@ -36,6 +36,22 @@ public class Utils {
         }
         return false;
     }
+    public static double inputDouble(String mess,String error) {
+        System.out.println(mess);
+        while (true) {
+            String input = sc.nextLine();
+            try {
+                double number = Double.parseDouble(input);
+                if (number <= 0) {
+                    System.out.println(error);
+                    continue;
+                }
+                return number;
+            } catch (NumberFormatException e) {
+                System.out.println("input a number !");
+            }
+        }
+    }
     public static double inputDouble(String mess, double min, double max) {
         System.out.println(mess);
         while (true) {

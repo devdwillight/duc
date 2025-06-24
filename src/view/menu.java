@@ -1,6 +1,7 @@
 package view;
 
 
+import utils.CustomException;
 import utils.InputvalidationException;
 
 import java.util.ArrayList;
@@ -40,16 +41,16 @@ public abstract class menu<T> {
         return select;
     }
     //-------------------------------------------
-    public abstract void execute(int ch) throws InputvalidationException;
+    public abstract void execute(int ch) throws InputvalidationException, CustomException;
     //-------------------------------------------
-    public void run() throws InputvalidationException {
+    public void run() throws InputvalidationException, CustomException {
         while(true){
             int n=getSelected();
             if(n<=mChon.size())execute(n);
             else break;
         }
     }
-    public void run1() throws InputvalidationException {
+    public void run1() throws InputvalidationException, CustomException {
         while(true){
             int n=getSelected1();
             if(n<=mChon.size())execute(n);

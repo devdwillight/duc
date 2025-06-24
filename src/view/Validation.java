@@ -1,9 +1,6 @@
 package view;
 
-import enums.Customer_types;
-import enums.Experience_levels;
-import enums.Gender_options;
-import enums.Valid_Positions;
+import enums.*;
 import utils.InputvalidationException;
 
 import java.time.LocalDate;
@@ -58,22 +55,7 @@ public class Validation {
         }
     }
 
-    public double inputDouble(String mess, double min, double max) {
-        System.out.println(mess);
-        while (true) {
-            String input = sc.nextLine();
-            try {
-                double number = Double.parseDouble(input);
-                if (number < min || number > max) {
-                    System.out.println("input between " + min + "and" + max + ":");
-                    continue;
-                }
-                return number;
-            } catch (NumberFormatException e) {
-                System.out.println("input a number !");
-            }
-        }
-    }
+
 
     public boolean checkInputYN(String mess) {
         System.out.println(mess);
@@ -92,9 +74,7 @@ public class Validation {
         }
     }
 
-    public static String getValidEmail(String prompt) {
-        return getValidString(prompt, EMAIL_REGEX, "Email không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ: abc@example.com).");
-    }
+
 
     public static String validateEmployeeId(String input) throws InputvalidationException {
         if (!input.matches("^NV-\\d{4}$")) {
@@ -220,6 +200,18 @@ public class Validation {
         }
     }
 
+    public static double validateArea(String prompt) {
+        double area;
+        while (true) {
+            System.out.println(prompt);
+            area = sc.nextDouble();
+            if (area > 0 && area <= 30) System.out.println("Diện tích phải lớn hơn 30m2.");
+            else {
+                return area;
+            }
+        }
+    }
+
     public static String getValidCustomerCmnd(String prompt) {
         return getValidString(prompt, CMND_CUSTOMER_REGEX, "CMND khách hàng phải đủ 9 hoặc 11 số.");
     }
@@ -286,5 +278,43 @@ public class Validation {
         }
     }
 
+    public static String getValidServiceType(String prompt, String error) {
+        String input;
+        while (true) {
+            System.out.print(prompt + " (" + String.join(", ", Arrays.stream(Type_Service.values())
+                    .map(Type_Service::getDisplayName)
+                    .collect(Collectors.joining(", "))) + "): ");
+            input = sc.nextLine();
+
+            if (Type_Service.isValid(input)) {
+                return input;
+            } else {
+                System.out.println(error + String.join(", ", Arrays.stream(Type_Service.values())
+                        .map(Type_Service::getDisplayName)
+                        .collect(Collectors.joining(", "))));
+            }
+        }
+    }
+    public static String getValidCRentType(String prompt, String error) {
+        String input;
+        while (true) {
+            System.out.print(prompt + " (" + String.join(", ",
+                    Arrays.stream(Rent_Type.values())
+                            .map(Rent_Type::getDisplayName)
+                            .collect(Collectors.toList())) + "): ");
+            input = sc.nextLine();
+
+            if (Rent_Type.isValid(input)) {
+                return input;
+            } else {
+                System.out.println(error + String.join(", ",
+                        Arrays.stream(Rent_Type.values())
+                                .map(Rent_Type::getDisplayName)
+                                .collect(Collectors.toList())));
+            }
+        }
+    }
 
 }
+
+

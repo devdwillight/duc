@@ -2,14 +2,20 @@ package controller;
 
 import service.CustomerService;
 import service.EmployeeService;
+import service.FacilityService;
+import utils.CustomException;
 import utils.InputvalidationException;
 import view.CustomerView;
 import view.EmployeeView;
+import view.FacilityView;
 import view.menu;
 
 public class ResortController extends menu<String> {
     public EmployeeService employeeService = new EmployeeService();
     public CustomerService customerService = new CustomerService();
+    public FacilityService facilityService = new FacilityService();
+
+    public FacilityView facilityView = new FacilityView();
     public CustomerView customerView = new CustomerView();
     public EmployeeView employeeView = new EmployeeView();
 
@@ -17,7 +23,7 @@ public class ResortController extends menu<String> {
         super(td, mc);
     }
 
-    public void employeeManagement() throws InputvalidationException {
+    public void employeeManagement() throws InputvalidationException, CustomException {
         String[] choice = {"Display list employees", "Add new employee", "Edit employee\n4.Return main menu"};
         menu<String> employ = new menu<String>("Employee Management", choice) {
             @Override
@@ -25,12 +31,13 @@ public class ResortController extends menu<String> {
 
                 switch (ch) {
                     case 1:
-                        employeeService.displayAllEmployees();
+                        employeeView.display(employeeService.findAll());
                         break;
                     case 2:
-
+                        employeeService.add(employeeView.getDetail());
                         break;
                     case 3:
+                        employeeService.update(employeeView.updateEmployee());
                         break;
                     case 4:
                         System.out.println("Quay lại menu chính.");
@@ -43,7 +50,7 @@ public class ResortController extends menu<String> {
         employ.run1();
     }
 
-    public void customerManagement() throws InputvalidationException {
+    public void customerManagement() throws InputvalidationException, CustomException {
         String[] choice = {"Display list customers", "Add new customer", "Edit new customer\n4.Return main menu"};
         menu<String> customer = new menu<String>("Customer Management", choice) {
             @Override
@@ -53,7 +60,7 @@ public class ResortController extends menu<String> {
                         customerView.display(customerService.findAll());
                         break;
                     case 2:
-                        customerService.addNewCustomer(customerView.getDetail());
+                        customerService.add(customerView.getDetail());
                         break;
                     case 3:
                         customerService.update(customerView.updateCustomer());
@@ -70,17 +77,33 @@ public class ResortController extends menu<String> {
         customer.run1();
     }
 
-    public void facilityManagement() throws InputvalidationException {
-        String[] choice = {"Display list facility", "Add new facility", "Edit new customer\n4.Return main menu"};
-        menu<String> facility = new menu<String>("Customer Management", choice) {
+    public void facilityManagement() throws InputvalidationException, CustomException {
+        String[] choice = {"Display list facility", "Add new facility", "Display list facility maintenance\n4.Return main menu"};
+        menu<String> facility = new menu<String>(" Facility Management", choice) {
             @Override
-            public void execute(int ch) {
+            public void execute(int ch) throws CustomException {
+                switch (ch) {
+                    case 1:
+                        facilityView.display(facilityService.findAll());
+                        break;
+                    case 2:
+                        facilityService.add(facilityView.getDetail());
+                        break;
+                    case 3:
+                        facilityService.displayMaintenance();
+                        break;
+                    case 4:
+                        System.out.println("Quay lại menu chính.");
+                        break;
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                }
             }
         };
         facility.run();
     }
 
-    public void bookingManagement() throws InputvalidationException {
+    public void bookingManagement() throws InputvalidationException, CustomException {
         String[] choice = {"Add new booking ", "Display list booking", "Create new contracts", "Display List contracts", "Edit contracts\n6.Return main menu"};
         menu<String> booking = new menu<String>("Booking Management", choice) {
             @Override
@@ -91,7 +114,7 @@ public class ResortController extends menu<String> {
         booking.run();
     }
 
-    public void promotionManagement() throws InputvalidationException {
+    public void promotionManagement() throws InputvalidationException, CustomException {
         String[] choice = {"Display list customers use service", "Display list customers get voucher\n3.Return main menu"};
         menu<String> promotion = new menu<String>("Promotion Management", choice) {
             @Override
@@ -103,7 +126,7 @@ public class ResortController extends menu<String> {
     }
 
     @Override
-    public void execute(int ch) throws InputvalidationException {
+    public void execute(int ch) throws InputvalidationException, CustomException {
         switch (ch) {
             case 1:
                 employeeManagement();
@@ -127,7 +150,7 @@ public class ResortController extends menu<String> {
 
     }
 
-    public static void main(String[] args) throws InputvalidationException {
+    public static void main(String[] args) throws InputvalidationException, CustomException {
         String[] choie = {"Employee Management", "Customer Management", "Facility Management", "BookingManagement", "Promotion Management\n6.Exit"};
         ResortController resortController = new ResortController("Resort", choie);
         resortController.run();

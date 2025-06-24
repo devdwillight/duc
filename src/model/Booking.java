@@ -9,7 +9,6 @@ public class Booking {
     private LocalDate endDay ;
     private String cusID ;
     private String madichvu ;
-    Facility facility = new Facility() ;
 
     public Booking(String bookingID, LocalDate bookingDay, LocalDate startDay, LocalDate endDay, String cusID, String madichvu) {
         this.bookingID = bookingID;

@@ -2,3 +2,4 @@ KH-0001,duC,1995-03-22,Nu,123456789,0901112233,thao.nguyen@example.com,Diamond,D
 KH-0002,Le Hoang Nam,1990-07-01,Nam,98765432101,0912223344,nam.le@example.com,Platinum,Ha Noi
 KH-0003,Pham Thanh Huong,2000-11-05,Nu,456789123,0983334455,huong.pham@example.com,Gold,TP Ho Chi Minh
 KH-0004,Vo Minh Khoa,1999-01-10,Nam,112233445,0974445566,khoa.vo@example.com,Silver,Hue
+KH-0005,hoang duc,2005-09-12,nam,045666666,0358867163,ducle@gmail.com,gold,khe sanh

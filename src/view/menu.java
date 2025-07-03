@@ -40,6 +40,12 @@ public abstract class menu<T> {
         int select = validation.inputInt("Enter selection", 1,4  );
         return select;
     }
+    public int getSelected2(){
+        display();
+        Scanner sc= new Scanner(System.in);
+        int select = validation.inputInt("Enter selection", 1,7  );
+        return select;
+    }
     //-------------------------------------------
     public abstract void execute(int ch) throws InputvalidationException, CustomException;
     //-------------------------------------------
@@ -53,6 +59,13 @@ public abstract class menu<T> {
     public void run1() throws InputvalidationException, CustomException {
         while(true){
             int n=getSelected1();
+            if(n<=mChon.size())execute(n);
+            else break;
+        }
+    }
+    public void run3() throws InputvalidationException, CustomException {
+        while(true){
+            int n=getSelected2();
             if(n<=mChon.size())execute(n);
             else break;
         }

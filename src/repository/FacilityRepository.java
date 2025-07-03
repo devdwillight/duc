@@ -27,7 +27,13 @@ public class FacilityRepository implements IFacilityRepository {
     public void writeToFile(Map<Facility, Integer> entities) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path + FILE_PATH))) {
             for (Map.Entry<Facility, Integer> entry : entities.entrySet()) {
-                writer.write(entry.getKey().toString() + "," + entry.getValue());
+                Facility facility = entry.getKey();
+                int timesUsed = entry.getValue();
+
+                // Cập nhật lại field timesUsed trong facility trước khi ghi ra file
+                facility.setTimesUsed(timesUsed);
+
+                writer.write(facility.toString());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -46,9 +52,9 @@ public class FacilityRepository implements IFacilityRepository {
                 if (line.trim().isEmpty()) continue;
 
                 String[] parts = line.split("\\,");
-                if ((line.startsWith("SVVL") && parts.length < 9) ||
-                        (line.startsWith("SVHO") && parts.length < 8) ||
-                        (line.startsWith("SVRO") && parts.length < 7)) {
+                if ((line.startsWith("SVVL") && parts.length < 10) ||
+                        (line.startsWith("SVHO") && parts.length < 9) ||
+                        (line.startsWith("SVRO") && parts.length < 8)) {
                     System.out.println(" Dòng lỗi: " + line);
                     continue;
                 }
@@ -65,21 +71,24 @@ public class FacilityRepository implements IFacilityRepository {
                     String standard = parts[6];
                     double poolArea = Double.parseDouble(parts[7].trim());
                     int floors = Integer.parseInt(parts[8].trim());
+                    int timesUsed =Integer.parseInt(parts[9].trim());
                     facility = new Villa(serviceCode, serviceName, usableArea, rentalCost,
-                            maxPeople, Type, standard, poolArea, floors);
+                            maxPeople, Type, standard, poolArea, floors,timesUsed);
                 } else if (serviceCode.startsWith("SVHO")) {
                     String roomStandard = parts[6].trim();
                     int floors = Integer.parseInt(parts[7].trim());
+                    int times = Integer.parseInt(parts[8].trim());
                     facility = new House(serviceCode, serviceName, usableArea, rentalCost,
-                            maxPeople, Type, roomStandard, floors);
+                            maxPeople, Type, roomStandard, floors,times);
                 } else if (serviceCode.startsWith("SVRO")) {
                     String freeService = parts[6];
+                    int times = Integer.parseInt(parts[7].trim());
                     facility = new Room(serviceCode, serviceName, usableArea, rentalCost,
-                            maxPeople, Type, freeService);
+                            maxPeople, Type, freeService,times);
                 }
 
                 if (facility != null) {
-                    map.put(facility, 0);
+                    map.put(facility,  facility.getTimesUsed());
                 }
 
             }

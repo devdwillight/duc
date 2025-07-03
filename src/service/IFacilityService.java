@@ -3,6 +3,8 @@ package service;
 import model.Facility;
 import utils.CustomException;
 
+import java.util.Map;
+
 public interface IFacilityService extends Service<Facility> {
     @Override
     Facility findById(String id);
@@ -17,5 +19,5 @@ public interface IFacilityService extends Service<Facility> {
 
     void displayMaintenance();
 
-
+    Map<Facility, Integer> updateUsageFromBookingsThisMonth();
 }

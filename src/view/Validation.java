@@ -16,10 +16,6 @@ import java.util.stream.Collectors;
 public class Validation {
     private static Scanner sc = new Scanner(System.in);
     private static final String EMPLOYEE_ID_REGEX = "^NV-\\d{4}$";
-    private static final String NAME_REGEX = "^([A-Z][a-z]+)(\\s[A-Z][a-z]+)*$";
-    public static final String CMND_REGEX = "^(\\d{9}|\\d{12})$";
-    public static final String PHONE_NUM_REGEX = "^0\\d{9}$";
-    public static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
     // --- REGEX for Customer ---
     public static final String CUSTOMER_ID_REGEX = "^KH-\\d{4}$";
     public static final String CMND_CUSTOMER_REGEX = "^(\\d{9}|\\d{11})$";

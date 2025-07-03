@@ -1,5 +1,6 @@
 package repository;
 
+import model.Booking;
 import model.Employee;
 
 import java.io.File;
@@ -9,6 +10,7 @@ public interface Repository<T, C> {
     final String path = new File("src").getAbsolutePath();
 
     void writeToFile(C enties);
+
 
     C readFromFile();
 }

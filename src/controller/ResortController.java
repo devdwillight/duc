@@ -1,23 +1,25 @@
 package controller;
 
-import service.CustomerService;
-import service.EmployeeService;
-import service.FacilityService;
+import model.Booking;
+import model.Contract;
+import service.*;
 import utils.CustomException;
 import utils.InputvalidationException;
-import view.CustomerView;
-import view.EmployeeView;
-import view.FacilityView;
-import view.menu;
+import view.*;
 
 public class ResortController extends menu<String> {
-    public EmployeeService employeeService = new EmployeeService();
-    public CustomerService customerService = new CustomerService();
-    public FacilityService facilityService = new FacilityService();
+    private EmployeeService employeeService = new EmployeeService();
+    private CustomerService customerService = new CustomerService();
+    private FacilityService facilityService = new FacilityService();
+    private BookingService bookingService = new BookingService();
+    private ContractService contractService = new ContractService();
 
-    public FacilityView facilityView = new FacilityView();
-    public CustomerView customerView = new CustomerView();
-    public EmployeeView employeeView = new EmployeeView();
+    private FacilityView facilityView = new FacilityView();
+    private CustomerView customerView = new CustomerView();
+    private EmployeeView employeeView = new EmployeeView();
+    private BookingView bookingView = new BookingView();
+    private ContractView contractView = new ContractView();
+    private PromotionView promotionView = new PromotionView();
 
     public ResortController(String td, String[] mc) {
         super(td, mc);
@@ -103,15 +105,50 @@ public class ResortController extends menu<String> {
         facility.run();
     }
 
+    public void createContractFlow() {
+        Booking booking = bookingService.getNextBooking();
+        if (booking == null) {
+            System.out.println("Không còn booking nào.");
+            return;
+        }
+        Contract contract = bookingView.inputContract(booking);
+        bookingService.saveContract(contract);
+    }
+
     public void bookingManagement() throws InputvalidationException, CustomException {
-        String[] choice = {"Add new booking ", "Display list booking", "Create new contracts", "Display List contracts", "Edit contracts\n6.Return main menu"};
+        String[] choice = {"Add new booking", "Display list booking", "Create new contracts", "Display List contracts", "Regular maintenance", "Edit contracts\n7.Return main menu"};
         menu<String> booking = new menu<String>("Booking Management", choice) {
             @Override
-            public void execute(int ch) {
+            public void execute(int ch) throws CustomException {
+                switch (ch) {
+                    case 1:
+                        bookingService.add(bookingView.getDetail());
+                        break;
+                    case 2:
+                        bookingView.display(bookingService.findAll());
+                        break;
+                    case 3:
+                        createContractFlow();
+                        break;
+                    case 4:
+                        contractView.display(contractService.findAll());
+                        break;
+                    case 5:
+                        facilityView.displayFacilityMaintenance();
+                        break;
+                    case 6:
+                        contractView.editContract();
+                        break;
+                    case 7:
+                        System.out.println("Quay lại menu chính.");
+                        break;
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                }
 
             }
         };
-        booking.run();
+        booking.run3();
     }
 
     public void promotionManagement() throws InputvalidationException, CustomException {
@@ -119,7 +156,19 @@ public class ResortController extends menu<String> {
         menu<String> promotion = new menu<String>("Promotion Management", choice) {
             @Override
             public void execute(int ch) {
-
+                switch (ch) {
+                    case 1:
+                        promotionView.displayCustomersUsedServiceByYear();
+                        break;
+                    case 2:
+                        promotionView.displayCustomersGetVoucher();
+                        break;
+                    case 3:
+                        System.out.println("Quay lại menu chính.");
+                        break;
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+                }
             }
         };
         promotion.run();
@@ -144,7 +193,6 @@ public class ResortController extends menu<String> {
                 promotionManagement();
                 break;
             default:
-
                 break;
         }
 

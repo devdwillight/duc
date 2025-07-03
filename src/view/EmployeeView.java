@@ -17,22 +17,31 @@ public class EmployeeView implements IEmployeeView {
     @Override
     public void display(ArrayList<Employee> entities) {
         if (entities == null || entities.isEmpty()) {
-            System.out.println("Không có Nhan vien nào để hiển thị.");
+            System.out.println("Không có Nhân viên nào để hiển thị.");
             return;
         }
-            printSeparator('+', 12, 20, 12, 10, 15, 25, 10, 15, 25,25,20,15);
-            System.out.printf("| %-10s | %-18s | %-10s | %-8s | %-13s | %-23s | %-8s | %-13s | %-23s |  %-23s |  %-23s |  %-10f\n",
-                    "Mã KH", "Tên KH", "Ngày sinh", "Giới tính", "CMND", "Email", "SĐT", "Loại", "Địa chỉ");
-            printSeparator('+', 12, 20, 12, 10, 15, 25, 10, 15, 25);
 
-            for (Employee c : entities) {
-                System.out.printf("| %-10s | %-18s | %-10s | %-8s | %-13s | %-23s | %-8s | %-13s | %-23s |\n",
-                        c.getEmployeeID(), c.getName(), c.getDob().format(Validation.DISPLAY_DATE_FORMATTER), c.getSex(),
-                        c.getCmnd(), c.getEmail(), c.getPhoneNum(),c.getExperience(),c.getPosition(),c.getSalary() );
-            }
+        // In dòng phân cách đầu
+        printSeparator('+', 12, 20, 12, 10, 15, 25, 10, 15, 15);
 
-            printSeparator('+', 12, 20, 12, 10, 15, 25, 10, 15, 25,25,20,15);
+        // In tiêu đề
+        System.out.printf("| %-10s | %-18s | %-10s | %-8s | %-13s | %-23s | %-10s | %-13s | %-13s | %-10s |\n",
+                "Mã NV", "Tên NV", "Ngày sinh", "Giới tính", "CMND", "Email", "SĐT", "Kinh nghiệm", "Vị trí", "Lương");
+
+        // In dòng phân cách giữa
+        printSeparator('+', 12, 20, 12, 10, 15, 25, 10, 15, 15);
+
+        // In dữ liệu từng nhân viên
+        for (Employee c : entities) {
+            System.out.printf("| %-10s | %-18s | %-10s | %-8s | %-13s | %-23s | %-10s | %-13s | %-13s | %-10.2f |\n",
+                    c.getEmployeeID(), c.getName(), c.getDob().format(Validation.DISPLAY_DATE_FORMATTER), c.getSex(),
+                    c.getCmnd(), c.getEmail(), c.getPhoneNum(), c.getExperience(), c.getPosition(), c.getSalary());
         }
+
+        // In dòng phân cách cuối
+        printSeparator('+', 12, 20, 12, 10, 15, 25, 10, 15, 15);
+    }
+
 
 
     @Override

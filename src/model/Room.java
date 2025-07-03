@@ -3,9 +3,10 @@ package model;
 public class Room extends Facility {
     private String freeService ;
 
-    public Room(String facilityID, String nameService, double userArea, double cost, int maxPerson, String type, String freeService) {
-        super(facilityID, nameService, userArea, cost, maxPerson, type);
+    public Room(String facilityID, String nameService, double userArea, double cost, int maxPerson, String type, String freeService,int timesUsed) {
+        super(facilityID, nameService, userArea, cost, maxPerson, type,timesUsed);
         this.freeService = freeService;
+
     }
 
     public String getFreeService() {
@@ -19,7 +20,7 @@ public class Room extends Facility {
     public String toString() {
         return getFacilityID() + "," + getNameService() + "," + getUserArea() + "," +
                 getCost() + "," + getMaxPerson() + "," + getType() + "," +
-                freeService;
+                freeService+","+getTimesUsed();
     }
 
 

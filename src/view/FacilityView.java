@@ -29,7 +29,6 @@ public class FacilityView implements IFacilityView {
 
         for (Map.Entry<Facility, Integer> entry : map.entrySet()) {
             Facility f = entry.getKey();
-            int usage = entry.getValue();
 
 
             String extra1 = "";
@@ -51,7 +50,7 @@ public class FacilityView implements IFacilityView {
 
             System.out.printf("| %-8s | %-20s | %-8.2f | %-10.2f | %-10d | %-10s | %-10s | %-25s | %-10d |\n",
                     f.getFacilityID(), f.getNameService(), f.getUserArea(), f.getCost(),
-                    f.getMaxPerson(), f.getType(),extra1, extra2, usage);
+                    f.getMaxPerson(), f.getType(),extra1, extra2, f.getTimesUsed());
         }
 
         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
@@ -91,7 +90,7 @@ public class FacilityView implements IFacilityView {
 
                 int villaFloor = Utils.inputInt("Nhap so tang cho tao :", 1,20);
 
-                return new Villa(id, nameService, userArea, cost, maxPerson, type, villaStandard, poolArea, villaFloor);
+                return new Villa(id, nameService, userArea, cost, maxPerson, type, villaStandard, poolArea, villaFloor,0);
 
             case 2: // Hous
                 String houseStandard = Utils.getAString("Nhập tiêu chuẩn phòng: ", "Invalid input");
@@ -99,13 +98,13 @@ public class FacilityView implements IFacilityView {
 
                 int houseFloor = Utils.inputInt("Nhap so tang cho tao :", 1,20);
 
-                return new House(id, nameService, userArea, cost, maxPerson, type, houseStandard, houseFloor);
+                return new House(id, nameService, userArea, cost, maxPerson, type, houseStandard, houseFloor,0);
 
             case 3: // Room
 
                 String freeService = Utils.getAString("DIch vu Mien Phi :  ", "Invalid input");
 
-                return new Room(id, nameService, userArea, cost, maxPerson, type, freeService);
+                return new Room(id, nameService, userArea, cost, maxPerson, type, freeService,0);
 
             default:
                 System.out.println("Lựa chọn không hợp lệ.");
@@ -123,5 +122,8 @@ public class FacilityView implements IFacilityView {
             }
         }
         return faciID;
+    }
+    public void displayFacilityMaintenance() {
+        facilityService.displayMaintenanceMonth();
     }
 }
